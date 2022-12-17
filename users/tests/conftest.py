@@ -1,6 +1,6 @@
 import pytest
 
-from factories.users import UserFactory
+from .factories.users import UserFactory
 
 @pytest.fixture
 def user():

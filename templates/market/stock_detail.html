@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section>
+    <div>
+        <p>{{ object.code }}</p>
+        <p>{{ object.name }}</p>
+        <figure class="">
+            <img class="" src="{{object.logo}}">
+        </figure>
+        <p>{{ object.sector }}</p>
+    </div>
+</section>
+
+
+{% endblock content %}
