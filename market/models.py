@@ -3,9 +3,9 @@ from model_utils.models import TimeStampedModel
 
 class Stock(TimeStampedModel):
     code = models.CharField(max_length=10, unique=True)
-    name = models.CharField(max_length=200)
-    logo = models.CharField(max_length=200)
-    sector = models.CharField(max_length=200)
+    name = models.CharField(max_length=200, null=True)
+    logo = models.CharField(max_length=500, null=True)
+    sector = models.CharField(max_length=200, null=True,)
 
     class Meta:
         verbose_name = "stock"
