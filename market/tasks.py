@@ -6,21 +6,21 @@ logger = get_task_logger(__name__)
 
 @shared_task(name = "task_stock_register")
 def task_stock_register():
-    logger.info("Carregando stocks.")
+    logger.info("Loading stocks...")
     stock_register()
-    logger.info("Carregamento dos stocks finalizados.")
+    logger.info("...Completed loading of stocks")
     return
 
 @shared_task(name = "task_quote_register")
 def task_quote_register():
-    logger.info("Carregando quotes.")
+    logger.info("Loading quotes...")
     quote_register()
-    logger.info("Carregamento dos quotes finalizados.")
+    logger.info("...Completed loading of quotes")
     return
 
 @shared_task(name = "task_check_user_stocks")
 def task_check_user_stocks():
-    logger.info("Checando user stokes.")
+    logger.info("Checking user stokes...")
     check_user_stocks()
-    logger.info("Finalizando checagem de user stokes.")
+    logger.info("...Finishing user stokes check.")
     return

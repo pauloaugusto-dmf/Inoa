@@ -36,10 +36,8 @@ def check_user_stocks():
     for user_stock in user_stocks:
         stock = Stock.objects.get(pk=user_stock.stock.id)
         if user_stock.min_price >= stock.quotes.last().price:
-            logger.info('Preço baixo. Hora de comprar')
             send_buy_email(stock.name, stock.quotes.last().price, user_stock.user.email)
         if user_stock.max_price <= stock.quotes.last().price:
-            logger.info('Preço alto. Hora de vender')
             send_sell_email(stock.name, stock.quotes.last().price, user_stock.user.email)
         
 def send_sell_email(stock, price, user_email):
