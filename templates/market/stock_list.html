@@ -4,21 +4,49 @@
 
 {% block content %}
 
-<section>
-    {% for stock in object_list %}
-    <div>
-        <p>{{ stock.code }}</p>
-        <p>{{ stock.name }}</p>
-        <figure class="">
-            <img class="" src="{{stock.logo}}">
-        </figure>
-        <p>{{ stock.sector }}</p>
-        <p>{{ stock.quotes.last.price }}</p>
+<section class="container pt-5"">
+    <div class="row row-cols-1 row-cols-md-6 g-4">
+        {% for stock in object_list %}
+        <div class="col">
+            <a href="{% url 'market:detail_stock' stock.id %}" class="nav-link">
+            <div class="card h-100">
+                <img src="{{stock.logo}}" class="card-img-top" alt="{{ stock.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ stock.code }}</h5>
+                    <p class="card-text">{{ stock.name }}</p>
+                    <p class="card-text">{{ stock.sector }}</p>
+                    <p class="card-text">R$: {{ stock.quotes.last.price }}</p>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% empty %}
+        <p>No Stock</p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p>No Stock</p>
-    {% endfor %}
+
+    <div class="container p-4">
+        <div class="pagination justify-content-center">
+            <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <a href="?page=1">&laquo; first</a>
+                  <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+              {% endif %}
+
+                <span class="current">
+                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                </span>
+
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}">next</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+              {% endif %}
+            </span>
+            </div>
+        </div>
+      </nav>
 </section>
+
 
 
 {% endblock content %}

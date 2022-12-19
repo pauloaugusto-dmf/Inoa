@@ -3,12 +3,14 @@ from .views import (
     StockListView,
     StockDetailView,
     UserStockCreateView,
-    UserStockListView
+    UserStockListView,
+    HomeView
 )
 
 app_name = 'market'
 
 urlpatterns = [
+    path('', HomeView.as_view(), name='home'),
     path('stocks', StockListView.as_view(), name='list_stocks'),
     path('stocks/<int:pk>/', StockDetailView.as_view(), name='detail_stock'),
     path('user/stocks/create', UserStockCreateView.as_view(), name='create_user_stock'),

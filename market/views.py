@@ -1,13 +1,20 @@
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic import DetailView, CreateView
+from django.views import View
 
 from .models import Stock, UserStock
 from .form import UserStockCreateForm
 
+class HomeView(View):
+    template_name = "index.html"
+    
+    def get(self, request):
+        return render(request, self.template_name)
+
 class StockListView(ListView):
     model = Stock
-    paginate_by = 15
+    paginate_by = 30
 
 class StockDetailView(DetailView):
     model = Stock

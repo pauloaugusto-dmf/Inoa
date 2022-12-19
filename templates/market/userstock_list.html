@@ -4,21 +4,27 @@
 
 {% block content %}
 
-<section>
-    {% for user_stock in object_list %}
-    <div>
-        <p>{{ user_stock.stock.code }}</p>
-        <p>{{ user_stock.stock.name }}</p>
-        <figure class="">
-            <img class="" src="{{user_stock.stock.logo}}">
-        </figure>
-        <p>{{ user_stock.stock.sector }}</p>
-        <p>{{ user_stock.min_price }}</p>
-        <p>{{ user_stock.max_price }}</p>
+<section class="container pt-5">
+    <div class="row row-cols-1 row-cols-md-6 g-4">
+        {% for user_stock in object_list %}
+        <div class="col">
+            <a href="{% url 'market:detail_stock' user_stock.stock.id %}" class="nav-link">
+            <div class="card h-100">
+                <img src="{{user_stock.stock.logo}}" class="card-img-top" alt="{{ user_stock.stock.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user_stock.stock.code }}</h5>
+                    <p class="card-text">{{ user_stock.stock.name }}</p>
+                    <p class="card-text">{{ user_stock.stock.sector }}</p>
+                    <p class="card-text">R$: {{ user_stock.min_price }} R$: {{ user_stock.max_price }}</p>
+                </div>
+            </div>
+            </a>
+        </div>
+        {% empty %}
+        <p>No Stock</p>
+        {% endfor %}
     </div>
-    {% empty %}
-    <p>No Stock</p>
-    {% endfor %}
+
 </section>
 
 
