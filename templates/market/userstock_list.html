@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<section>
+    {% for user_stock in object_list %}
+    <div>
+        <p>{{ user_stock.stock.code }}</p>
+        <p>{{ user_stock.stock.name }}</p>
+        <figure class="">
+            <img class="" src="{{user_stock.stock.logo}}">
+        </figure>
+        <p>{{ user_stock.stock.sector }}</p>
+        <p>{{ user_stock.min_price }}</p>
+        <p>{{ user_stock.max_price }}</p>
+    </div>
+    {% empty %}
+    <p>No Stock</p>
+    {% endfor %}
+</section>
+
+
+{% endblock content %}

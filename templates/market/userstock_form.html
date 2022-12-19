@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<form action="" class="" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend> Cadastro de uma nova postagem </legend>
+        <label for="stock">Stock:</label>
+        <select name="stock" required id="stock">
+            <option value="" selected>---------</option>
+            {% for stock in stocks %}
+            <option value="{{ stock.id }}">{{ stock.name }}</option>
+            {% empty %}
+            {% endfor %}
+        </select><br>
+
+        <label for="min_price">Min Price</label>
+        <input name="min_price" required id="min_price"></input><br>
+
+        <label for="max_price">Max Price</label>
+        <input name="max_price" required id="max_price"></input><br>
+
+
+        <input type="submit" class="" value="Salvar">
+    </fieldset>
+</form>
+
+
+{% endblock content %}
