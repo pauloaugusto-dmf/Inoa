@@ -45,7 +45,7 @@ def check_user_stocks():
 def send_sell_email(stock, price, user_email):
     send_mail(
         'Stock Sell',
-        f'Stock {stock} reached the value of {price} reais.\nIt\'s a good time to sell.',
+        f'Stock {stock} reached the value of R$ {price}.\nIt\'s a good time to sell.',
         'contato@inoa.com',
         [f'{user_email}'],
         fail_silently=False,
@@ -54,7 +54,7 @@ def send_sell_email(stock, price, user_email):
 def send_buy_email(stock, price, user_email):
     send_mail(
         'Stock Buy',
-        f'Stock {stock} reached the value of {price} reais.\nIt\'s a good time to buy.',
+        f'Stock {stock} reached the value of R$ {price}.\nIt\'s a good time to buy.',
         'contato@inoa.com',
         [f'{user_email}'],
         fail_silently=False,
