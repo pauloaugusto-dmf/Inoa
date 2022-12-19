@@ -5,17 +5,23 @@
 {% block content %}
 
 <section class="container pt-5">
-    <div class="row row-cols-1 row-cols-md-6 g-4">
+    <div class="row row-cols-1 row-cols-md-5 g-4">
         {% for user_stock in object_list %}
         <div class="col">
             <a href="{% url 'market:detail_stock' user_stock.stock.id %}" class="nav-link">
-            <div class="card h-100">
+            <div class="card h-100 shadow">
                 <img src="{{user_stock.stock.logo}}" class="card-img-top" alt="{{ user_stock.stock.name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ user_stock.stock.code }}</h5>
                     <p class="card-text">{{ user_stock.stock.name }}</p>
                     <p class="card-text">{{ user_stock.stock.sector }}</p>
-                    <p class="card-text">R$: {{ user_stock.min_price }} R$: {{ user_stock.max_price }}</p>
+                    <p class="card-text">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="green" class="bi bi-arrow-up-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 0 0 8a8 8 0 0 0 16 0zm-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
+                        </svg>  R$ {{ user_stock.max_price }}<br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="red" class="bi bi-arrow-down-circle-fill" viewBox="0 0 16 16">
+                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
+                        </svg>  R$ {{ user_stock.min_price }}</p>
                 </div>
             </div>
             </a>

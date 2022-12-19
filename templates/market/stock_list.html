@@ -5,17 +5,17 @@
 {% block content %}
 
 <section class="container pt-5"">
-    <div class="row row-cols-1 row-cols-md-6 g-4">
+    <div class="row row-cols-1 row-cols-md-5 g-4">
         {% for stock in object_list %}
         <div class="col">
             <a href="{% url 'market:detail_stock' stock.id %}" class="nav-link">
-            <div class="card h-100">
+            <div class="card h-100 shadow">
                 <img src="{{stock.logo}}" class="card-img-top" alt="{{ stock.name }}">
                 <div class="card-body">
                     <h5 class="card-title">{{ stock.code }}</h5>
                     <p class="card-text">{{ stock.name }}</p>
                     <p class="card-text">{{ stock.sector }}</p>
-                    <p class="card-text">R$: {{ stock.quotes.last.price }}</p>
+                    <p class="card-text">R$ {{ stock.quotes.last.price }}</p>
                 </div>
             </div>
             </a>

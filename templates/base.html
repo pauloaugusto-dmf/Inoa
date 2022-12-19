@@ -19,6 +19,18 @@
             </div>
         </a>
 
+        <a href="{% url 'market:list_stocks' %}" class="nav-link">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">All Stocks</span>
+            </div>
+        </a>
+
+        <a href="{% url 'market:list_user_stocks' %}" class="nav-link">
+            <div class="container-fluid">
+                <span class="navbar-brand mb-0 h1">Your Stocks</span>
+            </div>
+        </a>
+
         <a href="{% url 'market:create_user_stock' %}" class="nav-link">
             <div class="container-fluid">
                 <span class="navbar-brand mb-0 h1">Follow Stock</span>
