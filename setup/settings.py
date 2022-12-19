@@ -154,3 +154,7 @@ CELERY_BROKER_URL= 'pyamqp://rabbitmq:5672'
 CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_TIMEZONE = "America/Sao_Paulo"
 CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+
+#Email
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
