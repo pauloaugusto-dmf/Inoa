@@ -12,7 +12,6 @@ class StocksInfo():
     def get(self):
         return requests.get(BASE_URL + 'quote/list')
 
-
     def formatted(self, stock: Dict) -> Dict:
         stock_formatted = {
             'code': stock['stock'],

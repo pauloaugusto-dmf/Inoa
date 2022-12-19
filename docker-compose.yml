@@ -1,9 +1,10 @@
 version: "3"
 
 services:
-  web:
+  django:
     build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    container_name: django
+    command: sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
     ports:
@@ -12,14 +13,75 @@ services:
       - POSTGRES_NAME=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    networks:
+      - main
     depends_on:
-      - db
+      - postgres
+      - redis
+      - rabbitmq
+    restart: on-failure
 
-  db:
+  postgres:
+    container_name: postgres
     image: postgres
     volumes:
-      - ./data/db:/var/lib/postgresql/data
+      - postgresql-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    networks:
+      - main
+    restart: on-failure
+
+  redis:
+    container_name: redis
+    image: redis:alpine
+    networks:
+      - main
+    restart: on-failure
+
+  rabbitmq:
+    container_name: rabbitmq
+    hostname: rabbitmq
+    image: rabbitmq:latest
+    networks:
+      - main
+    ports:
+      - "5672:5672"
+    restart: on-failure
+
+  celery_worker:
+    command: sh -c "celery -A setup worker -l info"
+    container_name: celery_worker
+    build:
+      context: .
+    depends_on:
+      - django
+      - postgres
+      - redis
+      - rabbitmq
+    networks:
+      - main
+    restart: on-failure
+
+  celery_beat:
+    command: sh -c "celery -A setup beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+    container_name: celery_beat
+    build:
+      context: .
+    depends_on:
+      - django
+      - postgres
+      - redis
+      - rabbitmq
+    hostname: celery_beat
+    networks:
+      - main
+    restart: on-failure
+
+networks:
+  main:
+
+volumes:
+  postgresql-data:

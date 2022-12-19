@@ -13,6 +13,7 @@
             <img class="" src="{{stock.logo}}">
         </figure>
         <p>{{ stock.sector }}</p>
+        <p>{{ stock.quotes.last.price }}</p>
     </div>
     {% empty %}
     <p>No Stock</p>

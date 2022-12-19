@@ -12,6 +12,11 @@
             <img class="" src="{{object.logo}}">
         </figure>
         <p>{{ object.sector }}</p>
+        {% for quote in object.quotes.all %}
+            <p>{{ quote.price }}</p>
+        {% empty %}
+            <p>No Quote</p>
+        {% endfor %}
     </div>
 </section>
 
